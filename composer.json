@@ -1,0 +1,19 @@
+{
+    "name": "user/iwasi-proyectos",
+    "require": {
+        "yiisoft/yii2": "2.0.41.1",
+        "enmodel/iwasi-library-rest": "^v1.0.0",
+        "phpmailer/phpmailer": "^6.2"
+    },
+    "require-dev": {
+        "yiisoft/yii2-gii": "^2.2"
+    },
+    "authors": [{
+        "name": "Richard Huáman Gómez",
+        "email": "richard21hg92@gmail.com"
+    }],
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://nolberto_vilchez@bitbucket.org/nolberto_vilchez/iwasi-library-rest.git"
+    }]
+}
