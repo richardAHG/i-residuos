@@ -11,8 +11,8 @@ use Yii;
  * @property string $nombre
  * @property string|null $descripcion
  * @property string $material
- * @property int $peso_maximo
- * @property int $volumen
+ * @property float $peso_maximo
+ * @property float $volumen
  * @property string $creado_por
  * @property string|null $actualizado_por
  * @property string|null $eliminado_por
@@ -35,8 +35,7 @@ class RecipientesModel extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'material', 'peso_maximo', 'volumen', 'creado_por'], 'required'],
-            [['peso_maximo', 'volumen'], 'default', 'value' => null],
-            [['peso_maximo', 'volumen'], 'integer'],
+            [['peso_maximo', 'volumen'], 'number'],
             [['creado_por', 'actualizado_por', 'eliminado_por'], 'string'],
             [['estado'], 'boolean'],
             [['nombre'], 'string', 'max' => 120],
