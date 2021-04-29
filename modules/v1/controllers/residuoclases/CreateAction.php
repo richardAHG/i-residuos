@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers\residuoclases;
 
+use app\modules\v1\constants\Params;
 use app\rest\Action;
 use Yii;
 use yii\base\Model;
@@ -48,7 +49,7 @@ class CreateAction extends Action
 
         $requestParams = Yii::$app->getRequest()->getBodyParams();
 
-        // $requestParams['creado_por'] = Params::getAudit();
+        $requestParams['creado_por'] = Params::getAudit();
 
         $model->load($requestParams, '');
         if (!$model->save()) {

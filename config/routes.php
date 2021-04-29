@@ -27,5 +27,13 @@ return [
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
         
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'pluralize' => false,
+        'controller' =>[
+            'residuo-clases'=>'v1/residuoclases'
+        ],
+        'prefix'=>'/v1/<proyecto_id:\\d>'
     ]
 ];
