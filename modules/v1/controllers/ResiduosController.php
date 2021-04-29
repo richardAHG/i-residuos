@@ -6,7 +6,7 @@ use app\rest\ActiveController;
 
 class ResiduosController extends ActiveController
 {
-    public $modelClass='app\modules\v1\models\ResiduoTipoModel';
+    public $modelClass='app\modules\v1\models\ResiduoTiposModel';
 
     public function actions()
     {

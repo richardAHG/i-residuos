@@ -16,7 +16,6 @@ use yii\web\NotFoundHttpException;
 class Action extends RestAction
 {
     public $customToken = "proyecto_id";
-
     public function init()
     {
         parent::init();
