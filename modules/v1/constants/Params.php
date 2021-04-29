@@ -7,7 +7,7 @@ use app\helpers\Date;
 class Params
 {
     private static $proyectoId = 1;
-    private $userId = 1;
+    private static $userId = 1;
     private static $userIdCron = 100;
 
     public static function getProyectoId()
