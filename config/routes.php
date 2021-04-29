@@ -43,5 +43,13 @@ return [
             'residuo-colores'=>'v1/colores'
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'pluralize' => false,
+        'controller' =>[
+            'residuo-peligros'=>'v1/residuopeligros'
+        ],
+        'prefix'=>'/v1/<proyecto_id:\\d>'
     ]
 ];

@@ -4,7 +4,7 @@ namespace app\modules\v1\controllers;
 
 use app\rest\ActiveController;
 
-class ResiduosController extends ActiveController
+class ResiduopeligrosController extends ActiveController
 {
     public $modelClass='app\modules\v1\models\ResiduoTiposModel';
 
