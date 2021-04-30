@@ -59,5 +59,13 @@ return [
             'residuo-tratamientos'=>'v1/residuotratamientos'
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'pluralize' => false,
+        'controller' =>[
+            'rellenos-sanitarios'=>'v1/rellenosanitario'
+        ],
+        'prefix'=>'/v1/<proyecto_id:\\d>'
     ]
 ];

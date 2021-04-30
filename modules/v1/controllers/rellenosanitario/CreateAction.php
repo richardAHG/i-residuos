@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\v1\controllers\recipiente;
+namespace app\modules\v1\controllers\rellenosanitario;
 
 use app\modules\v1\constants\Params;
 use app\rest\Action;
@@ -53,7 +53,7 @@ class CreateAction extends Action
 
         $model->load($requestParams, '');
         if (!$model->save()) {
-            throw new BadRequestHttpException('Error al registrar el recipiente');
+            throw new BadRequestHttpException('Error al registrar el relleno sanitario');
         }
 
         return $model;

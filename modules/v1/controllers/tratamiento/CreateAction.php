@@ -53,7 +53,7 @@ class CreateAction extends Action
 
         $model->load($requestParams, '');
         if (!$model->save()) {
-            throw new BadRequestHttpException('Error al registrar el area');
+            throw new BadRequestHttpException('Error al registrar el tratamiento');
         }
 
         return $model;
