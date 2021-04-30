@@ -51,5 +51,13 @@ return [
             'residuo-peligros'=>'v1/residuopeligros'
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'pluralize' => false,
+        'controller' =>[
+            'residuo-tratamientos'=>'v1/residuotratamientos'
+        ],
+        'prefix'=>'/v1/<proyecto_id:\\d>'
     ]
 ];
