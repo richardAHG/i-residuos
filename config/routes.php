@@ -67,5 +67,13 @@ return [
             'rellenos-sanitarios'=>'v1/rellenosanitario'
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'pluralize' => false,
+        'controller' =>[
+            'estrategia-configuracion'=>'v1/estrategiaconfiguracion'
+        ],
+        'prefix'=>'/v1/<proyecto_id:\\d>'
     ]
 ];
