@@ -61,57 +61,62 @@ class CreateAction extends Action
         $transaction = Yii::$app->db->beginTransaction();
 
         try {
+            // print_r($requestParams);die();
+
+            [
+                'estrategia_id' => $estrategia,
+                'estrategia_atributo_id' => $estrategia_atributo,
+                'variable_id' => $variable,
+                'estrategia_atributo_opciones_id' => $estrategia_atributo_opciones,
+                'valor' => $valor,
+                'compromiso_id' => $compromiso
+            ] = $requestParams;
+            // print_r($estrategia);
+            // print_r($estrategia_atributo);
+            // print_r($variable);
+            // die();
+
+            if (!is_array($estrategia)) {
+                throw new BadRequestHttpException("Error de estructura de datos");
+            }
+
+            foreach ($estrategia as $key => $value) {
+                $params['estrategia_id'] = $value;
+                $params['creado_por'] = Params::getAudit();
+                $model->load($params, '');
+                // if (!$model->save()) {
+                //     throw new BadRequestHttpException('Error al registrar la estrategia de configuracion');
+                // }
+
+                foreach ($estrategia_atributo as $key => $row) {
+
+                    foreach ($row as $key => $item) {
+                        print_r($item);
+                        die();
+                        $atributosVariable = new AtributosVariableModel();
+                        $atributosVariable->estrategia_configuracion_id = $model->id;
+                        $atributosVariable->variable_id = 'f';
+                        $atributosVariable->estrategia_atributo_id = $item;
+                        $atributosVariable->creado_por = $requestParams['creado_por'];
+                        if ($atributosVariable->save()) {
+                            throw new BadRequestHttpException('Error al registrar la relacion entre atributo y variable');
+                        }
+                    }
+                }
+            }
+
+
+            die();
+
             foreach ($requestParams as $key => $value) {
-                if ($key=='estrategia_id') {
-                    foreach ($value as $key2 => $value2) {
-                        print_r($value2.', ');
-                    }
-                }
-                if ($key=='estrategia_atributo_id') {
-                    foreach ($value as $key3 => $value3) {
-                        foreach ($value3 as $key4 => $value5) {
-                            print_r($value5.', ');
-                        }
-                    }
-                }
-                if ($key=='variable_id') {
-                    foreach ($value as $key5 => $value6) {
-                        foreach ($value6 as $key6 => $value7) {
-                            print_r($value7.', ');
-                        }
-                    }
-                }
-                if ($key=='estrategia_atributo_opciones_id') {
-                    foreach ($value as $key7 => $value8) {
-                        foreach ($value8 as $key8 => $value9) {
-                            foreach ($value9 as $key9 => $value10) {
-                                print_r($value10.', ');
-                            }
-                        }
-                    }
-                }
-                if ($key=='valor') {
-                    foreach ($value as $key10 => $value11) {
-                        foreach ($value11 as $key11 => $value12) {
-                            foreach ($value12 as $key12 => $value13) {
-                                print_r($value13.', ');
-                            }
-                        }
-                    }
-                }
-                if ($key=='compromiso_id') {
-                    foreach ($value as $key13 => $value14) {
-                        foreach ($value14 as $key14 => $value15) {
-                            print_r($value15.', ');
-                        }
-                    }
-                }
-                //print_r($value2);
-                // die();
+                print_r($key);
+                print_r($value);
+                die();
             }
             die();
             foreach ($requestParams as $requestParam) {
-                print_r($requestParam);die();
+                print_r($requestParam);
+                die();
             }
             $model->load($requestParams, '');
             if (!$model->save()) {
