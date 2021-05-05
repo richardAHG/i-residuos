@@ -72,7 +72,10 @@ return [
         'class' => 'yii\rest\UrlRule',
         'pluralize' => false,
         'controller' =>[
-            'estrategia-configuracion'=>'v1/estrategiaconfiguracion'
+            'estrategia-configuracion'=>'v1/estrategiaconfiguracion',
+            'estrategia-configuracion-temp'=>'v1/residuousuarioestrategiastemp',
+            'estrategia-atributos-temp'=>'v1/estrategiaatributostemp',
+            'compromiso-variables-temp'=>'v1/compromisovariablestemp',
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
     ]

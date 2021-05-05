@@ -66,43 +66,52 @@ class CreateAction extends Action
             [
                 'estrategia_id' => $estrategia,
                 'estrategia_atributo_id' => $estrategia_atributo,
-                'variable_id' => $variable,
                 'estrategia_atributo_opciones_id' => $estrategia_atributo_opciones,
-                'valor' => $valor,
                 'compromiso_id' => $compromiso
             ] = $requestParams;
             // print_r($estrategia);
             // print_r($estrategia_atributo);
-            // print_r($variable);
+            // // print_r($estrategia_atributo_opciones);
             // die();
 
             if (!is_array($estrategia)) {
                 throw new BadRequestHttpException("Error de estructura de datos");
             }
 
-            foreach ($estrategia as $key => $value) {
-                $params['estrategia_id'] = $value;
-                $params['creado_por'] = Params::getAudit();
-                $model->load($params, '');
+            // print_r($estrategia_atributo);
+            // die();
+
+            foreach ($estrategia as $key1 => $value) {
+                print_r($key1.': ');
+                // $params['estrategia_id'] = $value;
+                // $params['creado_por'] = Params::getAudit();
+                // $model->load($params, '');
                 // if (!$model->save()) {
                 //     throw new BadRequestHttpException('Error al registrar la estrategia de configuracion');
                 // }
 
-                foreach ($estrategia_atributo as $key => $row) {
-
+                foreach ($estrategia_atributo[$key1] as $key => $row) {
+                    print_r($row);
                     foreach ($row as $key => $item) {
-                        print_r($item);
-                        die();
-                        $atributosVariable = new AtributosVariableModel();
-                        $atributosVariable->estrategia_configuracion_id = $model->id;
-                        $atributosVariable->variable_id = 'f';
-                        $atributosVariable->estrategia_atributo_id = $item;
-                        $atributosVariable->creado_por = $requestParams['creado_por'];
-                        if ($atributosVariable->save()) {
-                            throw new BadRequestHttpException('Error al registrar la relacion entre atributo y variable');
-                        }
+                        // print_r($item);
+                        // die();
+                        // $atributosVariable = new AtributosVariableModel();
+                        // $atributosVariable->estrategia_configuracion_id = $model->id;
+                        // $atributosVariable->variable_id = $item['variable_id'];
+                        // $atributosVariable->estrategia_atributo_id = $item['atributo_id'];
+                        // $atributosVariable->creado_por = $requestParams['creado_por'];
+                        // if (!$atributosVariable->save()) {
+                        //     throw new BadRequestHttpException('Error al registrar la relacion entre atributo y variable');
+                        // }
+                        // foreach ($estrategia_atributo_opciones as $key => $value) {
+                        //     foreach ($value as $key => $row) {
+                        //         print_r($row);
+                        //         die();
+                        //     }
+                        // }
                     }
                 }
+                die();
             }
 
 
