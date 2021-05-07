@@ -13,7 +13,7 @@ class ResiduousuarioestrategiastempController extends ActiveController
         $actions=parent::actions();
 
         $actions['create']['class']='app\modules\v1\controllers\estrategiaconfiguracion\temp\CreateAction';
-        // $actions['update']['class']='app\modules\v1\controllers\residuo\UpdateAction';
+        $actions['index']['class']='app\modules\v1\controllers\estrategiaconfiguracion\temp\IndexAction';
         // $actions['delete']['class']='app\modules\v1\controllers\residuo\DeleteAction';
 
         return $actions;
