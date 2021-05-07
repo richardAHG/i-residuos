@@ -3,11 +3,14 @@
 namespace app\modules\v1\controllers\estrategiaconfiguracion;
 
 use app\modules\v1\constants\Params;
+use app\modules\v1\models\AtributosRelacionadosModel;
 use app\modules\v1\models\AtributosVariableModel;
 use app\modules\v1\models\EstrategiaAtributosTempModel;
 use app\modules\v1\models\EstrategiaConfiguracionModel;
+use app\modules\v1\models\query\CompromisoAsociadoQuery;
 use app\modules\v1\models\ResiduoCompromisosModel;
 use app\modules\v1\models\ResiduoUsuarioEstrategiasTempModel;
+use app\modules\v1\models\ValoresAtributosRelacionadosModel;
 use app\modules\v1\models\VariableEquivalenciaModel;
 use app\rest\Action;
 use Yii;
@@ -68,8 +71,8 @@ class CreateAction extends Action
             //obtener datos de residuo usuario estratgias configuracion temp
             $estartegiaTemp = ResiduoUsuarioEstrategiasTempModel::find()
                 ->where(['estado' => true, 'usuario_id' => Params::getUserId()])
+                ->orderBy('estrategia_id asc')
                 ->all();
-
 
 
             foreach ($estartegiaTemp as $key => $value) {
@@ -85,11 +88,58 @@ class CreateAction extends Action
                 $estrategiaAtributoTemp = EstrategiaAtributosTempModel::find()
                     ->where(['estado' => true, 'estrategia_id' => $value['estrategia_id']])
                     ->all();
-                
-                // foreach ($estrategiaAtributo as $key => $value) {
-                //     $estrategiaAtributo = new estra
-                // }
+
+                // print_r($estrategiaAtributoTemp);die();
+
+                foreach ($estrategiaAtributoTemp as $key => $value) {
+
+                    $estrategiaAtributo = new AtributosRelacionadosModel();
+                    $estrategiaAtributo->estrategia_configuracion_id = $estrategia->id;
+                    $estrategiaAtributo->variable_id = $value['variable_id'];
+                    $estrategiaAtributo->atributo_id = $value['atributo_id'];
+
+                    if (!$estrategiaAtributo->save()) {
+                        throw new BadRequestHttpException("Error al guardar la estrategia atributo");
+                    }
+                }
+
+                //obtener los comprimsos de las estragias selecionadas
+                $compromisosAsociados = CompromisoAsociadoQuery::listarByEstrategy($estrategia->id);
+
+                $arrayComrpomisos = array_column($compromisosAsociados, 'compromiso_id');
+                $info = [];
+                foreach ($arrayComrpomisos as $key => $value) {
+                    $info[$value] = $value;
+                }
+
+                $arrayAtributo = AtributosRelacionadosModel::find()
+                    ->select(['id', 'atributo_id'])
+                    ->all();
+
+                $arrayIndex = array_column($arrayAtributo, 'atributo_id');
+                //regitro de compromisos que dependen de al estrategia seleccionada
+
+                foreach ($info as $key => $value) {
+                    $residuoCompromiso = new ResiduoCompromisosModel();
+                    $residuoCompromiso->compromiso_id = $value;
+                    $residuoCompromiso->estrategia_configuracion_id = $estrategia->id;
+
+                    if (!$residuoCompromiso->save()) {
+                        throw new BadRequestHttpException("Error al guardar los compromisos relacionados atributo");
+                    }
+
+                    foreach ($compromisosAsociados as $key => $value) {
+
+                        $index = array_search($arrayIndex, $value['atributo_id']);
+
+                        $valoresAtributosRelacionados = new ValoresAtributosRelacionadosModel();
+                        $valoresAtributosRelacionados->compromiso_relacionado_id = $residuoCompromiso->id;
+                        $valoresAtributosRelacionados->valor = $value['opcion_id'];
+                        $valoresAtributosRelacionados->atributo_relacionado_id = $arrayAtributo[$index]['id'];
+                    }
+                }
             }
+
 
 
             // [
