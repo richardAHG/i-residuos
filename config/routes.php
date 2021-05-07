@@ -78,5 +78,13 @@ return [
             'compromiso-variables-temp'=>'v1/compromisovariablestemp',
         ],
         'prefix'=>'/v1/<proyecto_id:\\d>'
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'pluralize' => false,
+        'controller' =>[
+            'compromiso-vinculado'=>'v1/compromisovinculado',
+        ],
+        'prefix'=>'/v1/<proyecto_id:\\d>'
     ]
 ];

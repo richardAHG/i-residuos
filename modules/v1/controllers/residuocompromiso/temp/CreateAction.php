@@ -68,6 +68,7 @@ class CreateAction extends Action
             //TODO: pendiente agregar funcion para valdiar que no registre estrategia repetida
             //FIXME: SI se envia un array con otros datos asignados anteriormente, eliminar la estrategia anterior
 
+
             // foreach ($requestParams['compromiso_id'] as $key => $value) {
             //     foreach ($requestParams['compromiso_atributo_opcion'][$key] as $ind => $row) {
             //         $model = new CompromisoVariablesTempModel();
