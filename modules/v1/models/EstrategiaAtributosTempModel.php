@@ -11,7 +11,7 @@ use Yii;
  * @property int $estrategia_id
  * @property int|null $atributo_id
  * @property int $variable_id
- * @property bool $omitido
+ * @property bool $asociado
  * @property bool $estado
  * @property string|null $eliminado_por
  */
@@ -31,10 +31,10 @@ class EstrategiaAtributosTempModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['estrategia_id', 'variable_id'], 'required'],
+            [['estrategia_id', 'variable_id', 'asociado'], 'required'],
             [['estrategia_id', 'atributo_id', 'variable_id'], 'default', 'value' => null],
             [['estrategia_id', 'atributo_id', 'variable_id'], 'integer'],
-            [['omitido', 'estado'], 'boolean'],
+            [['asociado', 'estado'], 'boolean'],
             [['eliminado_por'], 'string'],
         ];
     }
@@ -49,7 +49,7 @@ class EstrategiaAtributosTempModel extends \yii\db\ActiveRecord
             'estrategia_id' => 'Estrategia ID',
             'atributo_id' => 'Atributo ID',
             'variable_id' => 'Variable ID',
-            'omitido' => 'Omitido',
+            'asociado' => 'Asociado',
             'estado' => 'Estado',
             'eliminado_por' => 'Eliminado Por',
         ];

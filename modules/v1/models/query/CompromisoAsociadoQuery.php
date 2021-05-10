@@ -48,6 +48,8 @@ class CompromisoAsociadoQuery
         return $query;
     }
 
+    //FIXME: La lista debe mostrar solo los atributos asociados
+
     public static function listarByEstrategy($estrategiaId)
     {
         $query = (new \yii\db\Query())

@@ -8,10 +8,11 @@ use Yii;
  * This is the model class for table "residuos.residuo_compromisos".
  *
  * @property int $id
+ * @property int $estrategia_configuracion_id
  * @property int $compromiso_id
  * @property string $creado_por
+ * @property string|null $eliminado_por
  * @property bool $estado
- * @property int $estrategia_configuracion_id
  */
 class ResiduoCompromisosModel extends \yii\db\ActiveRecord
 {
@@ -29,10 +30,10 @@ class ResiduoCompromisosModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['compromiso_id', 'creado_por', 'estrategia_configuracion_id'], 'required'],
-            [['compromiso_id', 'estrategia_configuracion_id'], 'default', 'value' => null],
-            [['compromiso_id', 'estrategia_configuracion_id'], 'integer'],
-            [['creado_por'], 'string'],
+            [['estrategia_configuracion_id', 'compromiso_id', 'creado_por'], 'required'],
+            [['estrategia_configuracion_id', 'compromiso_id'], 'default', 'value' => null],
+            [['estrategia_configuracion_id', 'compromiso_id'], 'integer'],
+            [['creado_por', 'eliminado_por'], 'string'],
             [['estado'], 'boolean'],
         ];
     }
@@ -44,10 +45,11 @@ class ResiduoCompromisosModel extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'estrategia_configuracion_id' => 'Estrategia Configuracion ID',
             'compromiso_id' => 'Compromiso ID',
             'creado_por' => 'Creado Por',
+            'eliminado_por' => 'Eliminado Por',
             'estado' => 'Estado',
-            'estrategia_configuracion_id' => 'Estrategia Configuracion ID',
         ];
     }
 }

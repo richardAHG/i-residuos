@@ -10,11 +10,12 @@ use Yii;
  * @property int $id
  * @property int $estrategia_configuracion_id
  * @property int $variable_id
- * @property int $atributo_id
+ * @property int|null $atributo_id
+ * @property bool $asociado
  * @property string $creado_por
  * @property string|null $actualizado_por
  * @property string|null $eliminado_por
- * @property bool|null $estado
+ * @property bool $estado
  */
 class AtributosRelacionadosModel extends \yii\db\ActiveRecord
 {
@@ -32,11 +33,11 @@ class AtributosRelacionadosModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['estrategia_configuracion_id', 'variable_id', 'atributo_id', 'creado_por'], 'required'],
+            [['estrategia_configuracion_id', 'variable_id', 'asociado', 'creado_por'], 'required'],
             [['estrategia_configuracion_id', 'variable_id', 'atributo_id'], 'default', 'value' => null],
             [['estrategia_configuracion_id', 'variable_id', 'atributo_id'], 'integer'],
+            [['asociado', 'estado'], 'boolean'],
             [['creado_por', 'actualizado_por', 'eliminado_por'], 'string'],
-            [['estado'], 'boolean'],
         ];
     }
 
@@ -50,6 +51,7 @@ class AtributosRelacionadosModel extends \yii\db\ActiveRecord
             'estrategia_configuracion_id' => 'Estrategia Configuracion ID',
             'variable_id' => 'Variable ID',
             'atributo_id' => 'Atributo ID',
+            'asociado' => 'Asociado',
             'creado_por' => 'Creado Por',
             'actualizado_por' => 'Actualizado Por',
             'eliminado_por' => 'Eliminado Por',

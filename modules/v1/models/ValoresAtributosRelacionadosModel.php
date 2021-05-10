@@ -14,7 +14,7 @@ use Yii;
  * @property string $creado_por
  * @property string|null $actualizado_por
  * @property string|null $eliminado_por
- * @property bool|null $estado
+ * @property bool $estado
  */
 class ValoresAtributosRelacionadosModel extends \yii\db\ActiveRecord
 {
