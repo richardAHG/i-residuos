@@ -13,6 +13,7 @@ class EstrategiaatributostempController extends ActiveController
         $actions=parent::actions();
 
         $actions['create']['class']='app\modules\v1\controllers\atributosvariable\temp\CreateAction';
+        $actions['index']['class']='app\modules\v1\controllers\atributosvariable\temp\IndexAction';
         // $actions['update']['class']='app\modules\v1\controllers\residuo\UpdateAction';
         // $actions['delete']['class']='app\modules\v1\controllers\residuo\DeleteAction';
 
