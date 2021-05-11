@@ -69,7 +69,7 @@ class CreateAction extends Action
                 $model->estrategia_id = $requestParams['estrategia_id'];
                 $model->atributo_id = $value['atributo_id'];
                 $model->variable_id = $value['variable_id'];
-
+                $model->asociado = true;
                 if (!$model->save()) {
                     throw new BadRequestHttpException("Error al guardar los datos");
                 }

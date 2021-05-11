@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
  * 
  * @author Richard Huaman <richard21hg92@gmail.com>
  */
-class IndexAction extends Action
+class IndexVariableAction extends Action
 {
     /**
      * @return ActiveDataProvider
@@ -41,23 +41,22 @@ class IndexAction extends Action
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
-        $datos = AtributosQuery::getAtributtes($estrategiaId);
+        $query = $modelClass::find()
+            ->select('valor,nombre')
+            ->andWhere([
+                "estado" => 1,
+                "grupo" => 'VARIABLE'
+            ]);
 
-        return $datos;
-        // $query = $modelClass::find()
-        //     ->andWhere([
-        //         "estado" => 1
-        //     ]);
-
-        // return Yii::createObject([
-        //     'class' => ActiveDataProvider::className(),
-        //     'query' => $query,
-        //     'pagination' => [
-        //         'params' => $requestParams,
-        //     ],
-        //     'sort' => [
-        //         'params' => $requestParams,
-        //     ],
-        // ]);
+        return Yii::createObject([
+            'class' => ActiveDataProvider::className(),
+            'query' => $query,
+            'pagination' => [
+                'params' => $requestParams,
+            ],
+            'sort' => [
+                'params' => $requestParams,
+            ],
+        ]);
     }
 }
